@@ -1,4 +1,7 @@
 
+// Runs every weekday 7am - 9am every 15 minutes
+// */15 7,8,9 * * 1-5 /usr/local/bin/node {PWD}/index.js
+
 var cp = require('child_process');
 var xml2js = require('xml2js');
 var request = require('request');
@@ -11,6 +14,9 @@ get(url)
     var dest = data.root.station[0].etd[0].destination[0];
     var command = 'say ' + train.length[0] + ' car ' + dest + ' train in ' + train.minutes[0] + ' minutes';
     exec(command);
+  })
+  .catch(function(err) {
+    console.log(err);
   });
 
 function exec(command) {
